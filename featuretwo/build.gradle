@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 28
@@ -35,6 +37,10 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.5.0"
     implementation "com.squareup.retrofit2:converter-gson:2.5.0"
+
+    //Dagger
+    kapt "com.google.dagger:dagger-compiler:2.24"
+    implementation "com.google.dagger:dagger:2.24"
 
     testImplementation 'junit:junit:4.12'
 

@@ -1,3 +1,6 @@
 package com.phellipesilva.featuretwo.business
 
-class HelperClass
+import javax.inject.Inject
+
+
+class HelperClass @Inject constructor()
