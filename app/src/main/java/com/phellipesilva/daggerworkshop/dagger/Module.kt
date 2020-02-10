@@ -17,17 +17,14 @@ import java.util.concurrent.Executors
 import javax.inject.Singleton
 
 @Module
-class Module (val context: Context, val mainActivity: MainActivity) {
-
-    @Provides
-    fun providesContext() = context
+class Module {
 
     @Provides
     fun providesExecutor(): Executor = Executors.newSingleThreadExecutor()
 
     @Singleton
     @Provides
-    fun providesRoomDataBase(): UserDatabase =
+    fun providesRoomDataBase(context: Context): UserDatabase =
         Room.databaseBuilder(context, UserDatabase::class.java, "UserDatabase").build()
 
     @Provides
@@ -39,8 +36,4 @@ class Module (val context: Context, val mainActivity: MainActivity) {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(MainService::class.java)
-
-    @Provides
-    fun providesMainActivity() = mainActivity
-
 }

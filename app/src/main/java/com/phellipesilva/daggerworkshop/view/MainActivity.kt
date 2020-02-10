@@ -1,26 +1,13 @@
 package com.phellipesilva.daggerworkshop.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.room.Room
+import androidx.appcompat.app.AppCompatActivity
 import com.phellipesilva.daggerworkshop.R
-import com.phellipesilva.daggerworkshop.business.BusinessClassA
-import com.phellipesilva.daggerworkshop.configs.AppApplication
 import com.phellipesilva.daggerworkshop.configs.injector
-import com.phellipesilva.daggerworkshop.dagger.DaggerComponent
-import com.phellipesilva.daggerworkshop.dagger.Module
+import com.phellipesilva.daggerworkshop.dagger.MainActivityModule
 import com.phellipesilva.daggerworkshop.database.User
-import com.phellipesilva.daggerworkshop.database.UserDatabase
-import com.phellipesilva.daggerworkshop.interactor.MainInteractor
-import com.phellipesilva.daggerworkshop.navigation.Navigator
 import com.phellipesilva.daggerworkshop.presenter.MainPresenter
-import com.phellipesilva.daggerworkshop.service.MainService
-import com.phellipesilva.featuretwo.business.BusinessClassB
-import com.phellipesilva.featuretwo.business.HelperClass
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +19,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        injector.startInjection(this)
+//        injector
+//            .plusMainActivityModule(MainActivityModule(this))
+//            .startInjection(this)
+
+        injector
+            .getMainActivityComponentFactory()
+            .create(this)
+            .startInjection(this)
 
         mainPresenter.getUserFromDatabase()
 

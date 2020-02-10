@@ -8,9 +8,10 @@ import com.phellipesilva.daggerworkshop.dagger.Module
 
 class AppApplication: Application() {
 
-    val component: Component get() = DaggerComponent.builder()
-        .module(Module(this))
-        .build()
+    val component: Component get() = DaggerComponent
+                                                .builder()
+                                                .addContext(this)
+                                                .build()
 }
 
 val Activity.injector get() =  (applicationContext as AppApplication).component
